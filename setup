@@ -1,0 +1,30 @@
+#!/bin/sh
+set -e
+dir=$(dirname $0)
+cd "$dir/home"
+
+for file in .*; do
+  if ! test -f "$file"; then
+    true
+  elif ! test -e "$HOME/$file"; then
+    cp -v "$file" "$HOME/$file"
+  elif cmp "$file" "$HOME/$file"; then
+    echo "$HOME/$file already up-to-date"
+  else
+    diff -du "$HOME/$file" "$file"
+    read -p 'Apply? (y/n): '
+    if [ "x$REPLY" = "xy" ]; then
+      cp -v "$file" "$HOME/$file"
+    else
+      echo "Not applied: $HOME/$file"
+    fi
+  fi
+done
+
+if ! grep -q bash_profile_roaming ~/.bash_profile; then
+  {
+    echo 'if [ -f ~/.bash_profile_roaming ]; then'
+    echo '  . ~/.bash_profile_roaming'
+    echo 'fi'
+  } >> ~/.bash_profile
+fi
