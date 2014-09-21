@@ -10,6 +10,7 @@
     with_items:
     - emacs
     - git
+    - keepassx
     - tmux
 
   - name: install dotfiles
