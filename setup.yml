@@ -13,8 +13,8 @@
     - keepassx
     - tmux
 
-  - name: install dotfiles
-    copy: src={{ item }} dest={{ home }}/{{ item | basename }}
+  - name: link dotfiles
+    file: src={{ item }} dest={{ home }}/{{ item | basename }} state=link
     with_fileglob:
     - home/.*
 
@@ -26,8 +26,8 @@
   - name: ensure bin dir
     file: dest={{ home }}/bin state=directory
     
-  - name: install binfiles
-    copy: src={{ item }} dest={{ home }}/bin/{{ item | basename }} mode=0755
+  - name: link bin files
+    file: src={{ item }} dest={{ home }}/bin/{{ item | basename }} state=link
     with_fileglob:
     - home/bin/*
 
@@ -39,8 +39,8 @@
   - name: ensure emacs dir
     file: dest={{ home }}/.emacs.d/rohan state=directory
 
-  - name: install emacs files
-    copy: src={{ item }} dest={{ home }}/.emacs.d/rohan/{{ item | basename }}
+  - name: link emacs files
+    file: src={{ item }} dest={{ home }}/.emacs.d/rohan/{{ item | basename }} state=link
     with_fileglob:
     - home/emacs.d/rohan/*
 
