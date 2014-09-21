@@ -29,3 +29,18 @@
     copy: src={{ item }} dest={{ home }}/bin/{{ item | basename }} mode=0755
     with_fileglob:
     - home/bin/*
+
+  - name: ensure emacs dir
+    file: dest={{ home }}/.emacs.d/rohan state=directory
+
+  - name: install emacs files
+    copy: src={{ item }} dest={{ home }}/.emacs.d/rohan/{{ item | basename }}
+    with_fileglob:
+    - home/emacs.d/rohan/*
+
+  - name: link emacs
+    lineinfile:
+      create: yes
+      dest: "{{ home }}/.emacs"
+      line: "(load \"~/.emacs.d/rohan/init.el\")"
+      insertbefore: BOF
