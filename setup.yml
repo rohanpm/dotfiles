@@ -30,6 +30,11 @@
     with_fileglob:
     - home/bin/*
 
+  - name: do lein init
+    shell: lein --version
+    async: 600
+    poll: 0
+
   - name: ensure emacs dir
     file: dest={{ home }}/.emacs.d/rohan state=directory
 
