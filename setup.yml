@@ -1,0 +1,31 @@
+# run this using ansible
+- hosts: localhost
+  vars:
+    home: "{{ ansible_env.HOME }}"
+  tasks:
+
+  - name: install packages
+    yum: name={{ item }} state=present
+    sudo: yes
+    with_items:
+    - emacs
+    - git
+    - tmux
+
+  - name: install dotfiles
+    copy: src={{ item }} dest={{ home }}/{{ item | basename }}
+    with_fileglob:
+    - home/.*
+
+  - name: link bash profile
+    lineinfile:
+      dest: "{{ home }}/.bash_profile"
+      line: "if test -f $HOME/.bash_profile_roaming; then source $HOME/.bash_profile_roaming; fi"
+
+  - name: ensure bin dir
+    file: dest={{ home }}/bin state=directory
+    
+  - name: install binfiles
+    copy: src={{ item }} dest={{ home }}/bin/{{ item | basename }} mode=0755
+    with_fileglob:
+    - home/bin/*
