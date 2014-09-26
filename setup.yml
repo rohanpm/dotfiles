@@ -44,6 +44,14 @@
     with_fileglob:
     - home/emacs.d/rohan/*
 
+  - name: ensure leindir
+    file: dest={{ home }}/.lein state=directory
+
+  - name: link lein files
+    file: src={{ item }} dest={{ home }}/.lein/{{ item | basename }} state=link
+    with_fileglob:
+    - home/lein/*
+
   - name: link emacs
     lineinfile:
       create: yes
