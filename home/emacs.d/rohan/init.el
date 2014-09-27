@@ -10,7 +10,12 @@
     (progn
       (package-list-packages)
       (rohan--ensure-installed 'helm)
+      (rohan--ensure-installed 'helm-git-grep)
       (rohan--ensure-installed 'cider)))
 
 (helm-mode)
 (recentf-mode)
+
+
+; key bindings
+(global-set-key (kbd "C-c g") 'helm-git-grep)
