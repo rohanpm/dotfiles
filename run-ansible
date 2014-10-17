@@ -1,4 +1,4 @@
 #!/bin/sh
 dir="$(dirname $0)"
 cd "$dir"
-exec ansible-playbook -v --ask-sudo-pass -c local ./setup.yml
+exec ansible-playbook -v "$@" --ask-sudo-pass -c local playbooks/*devenv*.yml

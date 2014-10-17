@@ -1,8 +1,4 @@
-# run this using ansible
-- hosts: localhost
-
-  vars:
-    home: "{{ ansible_env.HOME }}"
+- hosts: devenv
 
   roles:
   - epel
