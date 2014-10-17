@@ -5,3 +5,13 @@ fi
 if test -f ~/perl5/perlbrew/etc/bashrc; then
   source ~/perl5/perlbrew/etc/bashrc
 fi
+
+for thing in \
+  vert \
+  gradle \
+; do
+  if test -e $HOME/dev/$thing/bin; then
+    PATH="$PATH:$HOME/dev/$thing/bin"
+  fi
+done
+export PATH
