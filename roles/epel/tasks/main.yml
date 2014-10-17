@@ -1,0 +1,4 @@
+---
+- name: ensure EPEL installed
+  yum: name=http://mirror.as24220.net/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm state=present
+  sudo: yes

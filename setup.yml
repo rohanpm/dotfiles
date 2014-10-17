@@ -1,7 +1,12 @@
 # run this using ansible
 - hosts: localhost
+
   vars:
     home: "{{ ansible_env.HOME }}"
+
+  roles:
+  - epel
+
   tasks:
 
   - name: install packages
@@ -12,6 +17,8 @@
     - git
     - keepassx
     - tmux
+    - maven
+    - xsel
 
   - name: link dotfiles
     file: src={{ item }} dest={{ home }}/{{ item | basename }} state=link
