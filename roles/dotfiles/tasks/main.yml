@@ -1,18 +1,18 @@
 ---
 - name: link dotfiles
-  file: src={{ item }} dest={{ home }}/{{ item | basename }} state=link
+  file: src={{ item }} dest={{ devhome }}/{{ item | basename }} state=link
   with_fileglob:
   - home/.*
 
 - name: link bash profile
   lineinfile:
-    dest: "{{ home }}/.bash_profile"
+    dest: "{{ devhome }}/.bash_profile"
     line: "if test -f $HOME/.bash_profile_roaming; then source $HOME/.bash_profile_roaming; fi"
 
 - name: ensure bin dir
-  file: dest={{ home }}/bin state=directory
+  file: dest={{ devhome }}/bin state=directory
     
 - name: link bin files
-  file: src={{ item }} dest={{ home }}/bin/{{ item | basename }} state=link
+  file: src={{ item }} dest={{ devhome }}/bin/{{ item | basename }} state=link
   with_fileglob:
   - home/bin/*

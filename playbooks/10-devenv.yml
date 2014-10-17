@@ -3,6 +3,7 @@
   roles:
   - devtools
   - dotfiles
+  - emacs
 
   tasks:
 
@@ -11,32 +12,11 @@
     async: 600
     poll: 0
 
-  - name: ensure emacs dir
-    file: dest={{ home }}/.emacs.d/rohan state=directory
-
-  - name: link emacs files
-    file: src={{ item }} dest={{ home }}/.emacs.d/rohan/{{ item | basename }} state=link
-    with_fileglob:
-    - home/emacs.d/rohan/*
-
   - name: ensure leindir
-    file: dest={{ home }}/.lein state=directory
+    file: dest={{ devhome }}/.lein state=directory
 
   - name: link lein files
-    file: src={{ item }} dest={{ home }}/.lein/{{ item | basename }} state=link
+    file: src={{ item }} dest={{ devhome }}/.lein/{{ item | basename }} state=link
     with_fileglob:
     - home/lein/*
 
-  - name: link emacs
-    lineinfile:
-      create: yes
-      dest: "{{ home }}/.emacs"
-      line: "(load \"~/.emacs.d/rohan/init.el\")"
-      insertbefore: BOF
-
-  - name: do emacs init
-    command: /usr/bin/emacs --batch \
-      --eval "(setq rohan--init-packages t)" \
-      --eval "(load \"/home/rohan/.emacs.d/rohan/init.el\")"
-    async: 300
-    poll: 0

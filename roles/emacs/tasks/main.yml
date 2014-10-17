@@ -1,0 +1,22 @@
+---
+- name: ensure emacs dir
+  file: dest={{ devhome }}/.emacs.d/rohan state=directory
+
+- name: link emacs files
+  file: src={{ item }} dest={{ devhome }}/.emacs.d/rohan/{{ item | basename }} state=link
+  with_fileglob:
+  - home/emacs.d/rohan/*
+
+- name: link emacs
+  lineinfile:
+    create: yes
+    dest: "{{ devhome }}/.emacs"
+    line: "(load \"~/.emacs.d/rohan/init.el\")"
+    insertbefore: BOF
+
+- name: do emacs init
+  command: /usr/bin/emacs --batch \
+    --eval "(setq rohan--init-packages t)" \
+    --eval "(load \"~/.emacs.d/rohan/init.el\")"
+  async: 300
+  poll: 0

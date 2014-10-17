@@ -1,4 +1,5 @@
 ---
 # when running on localhost, the expectation is that we are run as
 # the user whose profile shall be set up as a development env
-home: "{{ ansible_env.HOME }}"
+devhome: "{{ ansible_env.HOME }}"
+devuser: "{{ ansible_env.USER }}"
