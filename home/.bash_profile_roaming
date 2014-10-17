@@ -1,3 +1,7 @@
 if [ ! -z "$TMUX" ]; then
   tmux source-file $HOME/.tmux-session.conf >/dev/null
 fi
+
+if test -f ~/perl5/perlbrew/etc/bashrc; then
+  source ~/perl5/perlbrew/etc/bashrc
+fi
