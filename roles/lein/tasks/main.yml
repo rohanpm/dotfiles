@@ -1,0 +1,10 @@
+---
+- name: link lein script
+  file: src={{ item }} dest={{ devhome }}/bin/lein state=link
+  with_fileglob:
+  - lein
+
+- name: do lein init
+  shell: lein --version
+  async: 600
+  poll: 0
