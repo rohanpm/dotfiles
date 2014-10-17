@@ -11,7 +11,8 @@
       (package-list-packages)
       (rohan--ensure-installed 'helm)
       (rohan--ensure-installed 'helm-git-grep)
-      (rohan--ensure-installed 'cider)))
+      (rohan--ensure-installed 'cider)
+      (rohan--ensure-installed 'yaml-mode)))
 
 (helm-mode)
 (recentf-mode)
