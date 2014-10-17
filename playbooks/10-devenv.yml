@@ -1,38 +1,10 @@
 - hosts: devenv
 
   roles:
-  - epel
+  - devtools
+  - dotfiles
 
   tasks:
-
-  - name: install packages
-    yum: name={{ item }} state=present
-    sudo: yes
-    with_items:
-    - emacs
-    - git
-    - keepassx
-    - tmux
-    - maven
-    - xsel
-
-  - name: link dotfiles
-    file: src={{ item }} dest={{ home }}/{{ item | basename }} state=link
-    with_fileglob:
-    - home/.*
-
-  - name: link bash profile
-    lineinfile:
-      dest: "{{ home }}/.bash_profile"
-      line: "if test -f $HOME/.bash_profile_roaming; then source $HOME/.bash_profile_roaming; fi"
-
-  - name: ensure bin dir
-    file: dest={{ home }}/bin state=directory
-    
-  - name: link bin files
-    file: src={{ item }} dest={{ home }}/bin/{{ item | basename }} state=link
-    with_fileglob:
-    - home/bin/*
 
   - name: do lein init
     shell: lein --version

@@ -1,0 +1,11 @@
+---
+- name: install packages
+  yum: name={{ item }} state=present
+  sudo: yes
+  with_items:
+  - emacs
+  - git
+  - keepassx
+  - tmux
+  - maven
+  - xsel
