@@ -12,11 +12,12 @@
       (rohan--ensure-installed 'helm)
       (rohan--ensure-installed 'helm-git-grep)
       (rohan--ensure-installed 'cider)
+      (rohan--ensure-installed 'projectile)
       (rohan--ensure-installed 'yaml-mode)))
 
 (helm-mode)
 (recentf-mode)
-
+(projectile-global-mode)
 
 ; key bindings
 (global-set-key (kbd "C-c g") 'helm-git-grep)
