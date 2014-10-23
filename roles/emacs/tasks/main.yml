@@ -18,5 +18,3 @@
   command: /usr/bin/emacs --batch \
     --eval "(setq rohan--init-packages t)" \
     --eval "(load \"~/.emacs.d/rohan/init.el\")"
-  async: 300
-  poll: 0
